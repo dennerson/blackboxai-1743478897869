@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Lazada Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body class="font-roboto bg-gray-50">
+    <!-- Header (same as index.html) -->
+    <header class="bg-orange-500 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-2xl font-bold">Lazada</a>
+                <div class="relative w-96">
+                    <input type="text" placeholder="Search for products..." 
+                           class="w-full py-2 px-4 rounded text-gray-800 focus:outline-none">
+                    <button class="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="flex items-center space-x-6">
+                <a href="/auth.html" class="hover:underline"><i class="fas fa-user mr-1"></i> Login</a>
+                <a href="/cart.html" class="hover:underline"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Listing Section -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Filters -->
+            <aside class="md:w-1/4 bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold mb-4">Filters</h2>
+                
+                <!-- Category Filter -->
+                <div class="mb-6">
+                    <h3 class="font-medium mb-2">Categories</h3>
+                    <ul class="space-y-1">
+                        <li><a href="?category=electronics" class="text-orange-500 hover:underline">Electronics</a></li>
+                        <li><a href="?category=fashion" class="hover:underline">Fashion</a></li>
+                        <li><a href="?category=home" class="hover:underline">Home & Living</a></li>
+                        <li><a href="?category=beauty" class="hover:underline">Beauty</a></li>
+                    </ul>
+                </div>
+
+                <!-- Price Range -->
+                <div class="mb-6">
+                    <h3 class="font-medium mb-2">Price Range</h3>
+                    <div class="flex items-center space-x-2">
+                        <input type="number" placeholder="Min" class="input-field">
+                        <span>to</span>
+                        <input type="number" placeholder="Max" class="input-field">
+                    </div>
+                </div>
+
+                <!-- Ratings -->
+                <div>
+                    <h3 class="font-medium mb-2">Customer Ratings</h3>
+                    <div class="space-y-1">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="rating-4" class="mr-2">
+                            <label for="rating-4" class="flex items-center">
+                                ${renderRatingStars(4)} & Up
+                            </label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="rating-3" class="mr-2">
+                            <label for="rating-3" class="flex items-center">
+                                ${renderRatingStars(3)} & Up
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="md:w-3/4">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold" id="category-title">All Products</h1>
+                    <div>
+                        <label for="sort" class="mr-2">Sort By:</label>
+                        <select id="sort" class="input-field">
+                            <option value="popular">Popular</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Customer Rating</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="product-grid">
+                    <!-- Products will be loaded via JavaScript -->
+                </div>
+
+                <div class="mt-8 flex justify-center">
+                    <button id="load-more" class="btn-primary px-6 py-2">
+                        Load More Products
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">Help Center</a></li>
+                        <li><a href="#" class="hover:underline">How to Buy</a></li>
+                        <li><a href="#" class="hover:underline">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+                <!-- Other footer sections -->
+            </div>
+        </div>
+    </footer>
+
+    <script src="/scripts/app.js"></script>
+    <script>
+        // Additional product listing functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const category = getUrlParameter('category');
+            if (category) {
+                document.getElementById('category-title').textContent = 
+                    category.charAt(0).toUpperCase() + category.slice(1);
+                loadProductsByCategory(category);
+            } else {
+                loadAllProducts();
+            }
+
+            document.getElementById('sort').addEventListener('change', (e) => {
+                sortProducts(e.target.value);
+            });
+
+            document.getElementById('load-more').addEventListener('click', loadMoreProducts);
+        });
+
+        function loadProductsByCategory(category) {
+            const filteredProducts = products.filter(p => p.category === category);
+            renderProductGrid(filteredProducts);
+        }
+
+        function loadAllProducts() {
+            renderProductGrid(products);
+        }
+
+        function renderProductGrid(productsToShow) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            
+            productsToShow.forEach(product => {
+                grid.innerHTML += `
+                    <div class="product-card fade-in">
+                        <a href="/product-detail.html?id=${product.id}">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="p-4">
+                                <h3 class="text-gray-800 mb-1">${product.name}</h3>
+                                <div class="flex items-center mb-2">
+                                    ${renderRatingStars(product.rating)}
+                                    <span class="text-gray-500 text-sm ml-1">(${product.rating})</span>
+                                </div>
+                                <div class="price">$${product.price.toFixed(2)}</div>
+                                <div class="original-price">$${product.originalPrice.toFixed(2)}</div>
+                                <button class="btn-primary w-full mt-3 add-to-cart" data-id="${product.id}">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            });
+        }
+
+        function sortProducts(criteria) {
+            let sortedProducts = [...products];
+            
+            switch(criteria) {
+                case 'price-low':
+                    sortedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sortedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    sortedProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                default:
+                    // Default sorting (popular)
+                    break;
+            }
+            
+            renderProductGrid(sortedProducts);
+        }
+
+        function loadMoreProducts() {
+            // In a real app, this would fetch more products from an API
+            alert('Loading more products...');
+        }
+    </script>
+</body>
+</html>
