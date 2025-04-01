@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Bluetooth Earbuds",
+    "price": 29.99,
+    "originalPrice": 49.99,
+    "image": "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg",
+    "rating": 4.5,
+    "category": "electronics",
+    "description": "High-quality wireless earbuds with noise cancellation and 20hr battery life."
+  }
+]
