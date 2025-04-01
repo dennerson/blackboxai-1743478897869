@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazada Clone - Online Shopping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body class="font-roboto bg-gray-50">
+    <!-- Header -->
+    <header class="bg-orange-500 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-2xl font-bold">Lazada</a>
+                <div class="relative w-96">
+                    <input type="text" placeholder="Search for products..." 
+                           class="w-full py-2 px-4 rounded text-gray-800 focus:outline-none">
+                    <button class="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="flex items-center space-x-6">
+                <a href="/auth.html" class="hover:underline"><i class="fas fa-user mr-1"></i> Login</a>
+                <a href="/cart.html" class="hover:underline"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-orange-100 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4">Shop Smart, Save Big!</h1>
+                    <p class="text-lg text-gray-600 mb-6">Discover amazing deals on electronics, fashion, home goods and more.</p>
+                    <a href="/products.html" class="bg-orange-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-600 transition">Shop Now</a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.pexels.com/photos/3584994/pexels-photo-3584994.jpeg" alt="Shopping" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8">Shop by Category</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <a href="/products.html?category=electronics" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="text-4xl text-orange-500 mb-3"><i class="fas fa-laptop"></i></div>
+                    <h3 class="font-medium">Electronics</h3>
+                </a>
+                <a href="/products.html?category=fashion" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="text-4xl text-orange-500 mb-3"><i class="fas fa-tshirt"></i></div>
+                    <h3 class="font-medium">Fashion</h3>
+                </a>
+                <a href="/products.html?category=home" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="text-4xl text-orange-500 mb-3"><i class="fas fa-home"></i></div>
+                    <h3 class="font-medium">Home & Living</h3>
+                </a>
+                <a href="/products.html?category=beauty" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="text-4xl text-orange-500 mb-3"><i class="fas fa-spa"></i></div>
+                    <h3 class="font-medium">Beauty</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold">Featured Products</h2>
+                <a href="/products.html" class="text-orange-500 hover:underline">View All</a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="featured-products">
+                <!-- Products will be loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">Help Center</a></li>
+                        <li><a href="#" class="hover:underline">How to Buy</a></li>
+                        <li><a href="#" class="hover:underline">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">About Us</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">About Lazada</a></li>
+                        <li><a href="#" class="hover:underline">Careers</a></li>
+                        <li><a href="#" class="hover:underline">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-orange-400"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-orange-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-orange-400"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Download App</h3>
+                    <div class="space-y-2">
+                        <a href="#" class="block"><img src="https://laz-img-cdn.alicdn.com/tfs/TB1qEwuzrj1gK0jSZFOXXc7GpXa-200-66.png" alt="App Store" class="h-10"></a>
+                        <a href="#" class="block"><img src="https://laz-img-cdn.alicdn.com/tfs/TB1qEwuzrj1gK0jSZFOXXc7GpXa-200-66.png" alt="Google Play" class="h-10"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/scripts/app.js"></script>
+</body>
+</html>
