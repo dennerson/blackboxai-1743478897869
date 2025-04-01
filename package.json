@@ -1,7 +1,7 @@
 {
-  "name": "lazada-clone",
+  "name": "SpendMore-clone",
   "version": "1.0.0",
-  "description": "A Lazada e-commerce clone",
+  "description": "A SpendMore e-commerce clone",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
